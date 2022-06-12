@@ -1,0 +1,19 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "File Manager using Node.js APIs",
+  "type": "module",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aldrachova/file-manager.git"
+  },
+  "author": "Alena Drachova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aldrachova/file-manager/issues"
+  },
+  "homepage": "https://github.com/aldrachova/file-manager#readme"
+}
