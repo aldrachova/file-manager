@@ -1,4 +1,4 @@
-import { cp as copy, rm as remove } from 'fs';
+import { cp as copy, rm as remove, rename } from 'fs';
 import { basename, resolve } from 'path';
 
 // Read file and print it's content in console
@@ -12,8 +12,21 @@ export const add = (newFileName) => {
 };
 
 // Rename file
-export const rn = (pathToFile, newFileName) => {
+export const rn = (command, currentDirectory) => {
+  const commandArgs = command.split(' ');
+  if (commandArgs.length !== 3) {
+    console.log('Invalid input');
+    return;
+  }
 
+  const oldPath = resolve(currentDirectory, commandArgs[1]);
+  const oldFileName = basename(oldPath);
+  const newPath = oldPath.replace(oldFileName, commandArgs[2]);
+
+  rename(oldPath, newPath, (err) => {
+    if (err) console.log('Operation failed');
+    console.log('File was renamed');
+  });
 };
 
 // Copy file
