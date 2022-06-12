@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { createBrotliDecompress } from 'zlib';
 import { pipeline } from 'stream';
 import { ReadableStream } from './streams/readable.js'
@@ -18,3 +19,14 @@ export const decompress = async (sourcePath, destinationPath) => {
     }
   );  
 };
+
+export const execDecompressCommand = async (command, currentDirectory) => {
+  const commandArgs = command.split(' ');
+  if (commandArgs.length !== 3) {
+    console.log('Invalid input');
+    return;
+  }
+  const sourcePath = resolve(currentDirectory, commandArgs[1].trim());
+  const destinationPath = resolve(currentDirectory, commandArgs[2].trim());
+  await decompress(sourcePath, destinationPath);
+}

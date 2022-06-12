@@ -4,7 +4,7 @@ export const parseUsername = () => {
   let userName = 'Username';
 
   for (let i = 0; i < cliArgs.length; i++) {
-    if (cliArgs[i].startsWith('--username'))
+    if (cliArgs[i].startsWith('--username=') && cliArgs.length > 11)
       userName = cliArgs[i].slice(11);
   }
 
