@@ -6,6 +6,7 @@ import { getHomeDir, execOsCommand } from './os-info.js';
 import { execHashCommand } from './hash.js';
 import { execCompressCommand } from './compress.js';
 import { execDecompressCommand } from './decompress.js';
+import { cp, mv, rm } from './files-operations.js';
 
 const username = parseUsername();
 console.log(`Welcome to the File Manager, ${username}!`);
@@ -40,9 +41,20 @@ const checkCommand = async (command) => {
   }
   if (command.startsWith('compress')) {
     await execCompressCommand(command, currentDirectory);
+    pwd();
   }
   if (command.startsWith('decompress')) {
     await execDecompressCommand(command, currentDirectory);
+    pwd();
+  }
+  if (command.startsWith('rm')) {
+    await rm(command, currentDirectory);
+  }
+  if (command.startsWith('cp')) {
+    await cp(command, currentDirectory);
+  }
+  if (command.startsWith('mv')) {
+    await mv(command, currentDirectory);
   }
 }
 
