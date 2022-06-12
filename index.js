@@ -1,7 +1,7 @@
 import * as readline from 'node:readline';
 import { stdin as input, stdout as output } from 'node:process';
 import { parseUsername } from './cli.js';
-import { ls } from './navigation.js';
+import { cd, ls, up } from './navigation.js';
 import { getHomeDir, execOsCommand } from './os-info.js';
 import { execHashCommand } from './hash.js';
 import { execCompressCommand } from './compress.js';
@@ -42,19 +42,37 @@ const checkCommand = async (command) => {
   if (command.startsWith('compress')) {
     await execCompressCommand(command, currentDirectory);
     pwd();
+    return;
   }
   if (command.startsWith('decompress')) {
     await execDecompressCommand(command, currentDirectory);
     pwd();
+    return;
   }
   if (command.startsWith('rm')) {
     await rm(command, currentDirectory);
+    pwd();
+    return;
   }
   if (command.startsWith('cp')) {
     await cp(command, currentDirectory);
+    pwd();
+    return;
   }
   if (command.startsWith('mv')) {
     await mv(command, currentDirectory);
+    pwd();
+    return;
+  }
+  if (command.startsWith('up')) {
+    currentDirectory = await up(currentDirectory);
+    pwd();
+    return;
+  }
+  if (command.startsWith('cd')) {
+    currentDirectory = await cd(command, currentDirectory);
+    pwd();
+    return;
   }
 }
 
